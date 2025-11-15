@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | SR Photo & Films</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======= NAVBAR ======= -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo">
+        <h1>SR Photo & Films</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="booking.html" class="btn-book">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ======= CONTACT SECTION ======= -->
+  <section class="contact-section">
+    <h2>Get in Touch 💌</h2>
+    <p>We’d love to hear from you! Whether it’s about booking a session or any query, just drop a message below.</p>
+
+    <div class="contact-container">
+      
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><strong>📍 Address:</strong> SR Photo & Films Studio, Pune, Maharashtra</p>
+        <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+        <p><strong>📧 Email:</strong> srphotoandfilms@gmail.com</p>
+
+        <div class="social-links">
+          <a href="#" title="Instagram"><img src="images/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="images/fb.png" alt="Facebook"></a>
+          <a href="#" title="YouTube"><img src="images/yt.png" alt="YouTube"></a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form id="contactForm" class="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Type your message..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======= POPUP ======= -->
+  <div id="msgPopup" class="popup">
+    <div class="popup-content">
+      <h3>Thank You 💗</h3>
+      <p>Your message has been sent successfully! We’ll reply to you soon.</p>
+      <button onclick="closePopup()" class="btn">Close</button>
+    </div>
+  </div>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <p>© 2025 SR Photo & Films | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const msgPopup = document.getElementById('msgPopup');
+
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      msgPopup.classList.add('show');
+      contactForm.reset();
+    });
+
+    function closePopup() {
+      msgPopup.classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Shoot | SR Photo & Films</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======= NAVBAR ======= -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo">
+        <h1>SR Photo & Films</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="active btn-book">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ======= BOOKING SECTION ======= -->
+  <section class="booking-section">
+    <h2>Book Your Photoshoot</h2>
+    <p>Fill in the details below and we’ll get in touch to make your moments unforgettable!</p>
+
+    <form id="bookingForm" class="booking-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="shootType">Select Shoot Type</label>
+        <select id="shootType" name="shootType" required>
+          <option value="">-- Choose an option --</option>
+          <option value="Pre-Wedding">Pre-Wedding</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Maternity">Maternity</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Additional Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Any special requests or notes?"></textarea>
+      </div>
+
+      <button type="submit" class="btn">Submit Booking</button>
+    </form>
+  </section>
+
+  <!-- ======= POPUP ======= -->
+  <div id="thankYouPopup" class="popup">
+    <div class="popup-content">
+      <h3>Thank You 💗</h3>
+      <p>Your booking request has been submitted successfully! We’ll contact you soon.</p>
+      <button onclick="closePopup()" class="btn">Close</button>
+    </div>
+  </div>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <p>© 2025 SR Photo & Films | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Handle Form Submission
+    const form = document.getElementById('bookingForm');
+    const popup = document.getElementById('thankYouPopup');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      popup.classList.add('show');
+      form.reset();
+    });
+
+    function closePopup() {
+      popup.classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
