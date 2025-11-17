@@ -1,55 +1,486 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SR Photo & Films | Capture Your Moments</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-</head>
-<body>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SR Photo & Films — Multi-Theme Cinematic</title>
+  <meta name="description" content="SR Photo & Films — Cinematic photography & films for weddings, pre-weddings, maternity & events. Book cinematic shoots, view gallery and packages." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ======= NAVBAR ======= -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="images/logo.png" alt="SR Photo & Films Logo">
-        <h1>SR Photo & Films</h1>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Theme variables for three themes — toggled by .theme-red / .theme-neon / .theme-gold on body */
+    :root{
+      --bg: #0b0b0b;
+      --muted: #98a0a6;
+      --glass: rgba(255,255,255,0.03);
+      --accent: #b11226; /* fallback */
+      --accent-2: #cf1b33;
+      --glow: rgba(177,18,38,0.18);
+      --footer-bg: linear-gradient(180deg,#070707,#0b0b0b);
+      --focus-ring: 0 0 0 4px rgba(177,18,38,0.14);
+    }
+    body.theme-red {
+      --accent: #b11226;
+      --accent-2: #cf1b33;
+      --glow: rgba(177,18,38,0.16);
+      --footer-bg: linear-gradient(180deg,#040405,#0b0708);
+      --focus-ring: 0 0 0 4px rgba(177,18,38,0.14);
+    }
+    body.theme-neon {
+      --accent: #6ee7f1;
+      --accent-2: #a78bfa;
+      --glow: rgba(103,232,249,0.12);
+      --footer-bg: linear-gradient(180deg,#04031a,#060517);
+      --focus-ring: 0 0 0 4px rgba(103,232,249,0.12);
+    }
+    body.theme-gold {
+      --accent: #d4af37;
+      --accent-2: #ffd66b;
+      --glow: rgba(212,175,55,0.08);
+      --footer-bg: linear-gradient(180deg,#050402,#0b0806);
+      --focus-ring: 0 0 0 4px rgba(212,175,55,0.12);
+    }
+
+    /* shared utils */
+    .glass-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); }
+    .accent-btn { background: linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow: 0 8px 30px var(--glow); }
+    .floating { animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-10px);} }
+
+    /* typing effect container width controlled via JS */
+    .typing { border-right: 3px solid var(--accent); white-space:nowrap; overflow:hidden; display:inline-block; }
+
+    .hero-image { transition: opacity .45s ease-in-out; }
+
+    .shape-1{ position:absolute; right:-6rem; top:6rem; width:20rem; height:20rem; border-radius:9999px; filter: blur(36px); opacity:.55; background: radial-gradient(circle at 30% 30%, var(--accent), transparent 35%); pointer-events:none; }
+    .shape-2{ position:absolute; left:-8rem; bottom:-4rem; width:32rem; height:32rem; border-radius:24rem; filter: blur(80px); opacity:.28; background: radial-gradient(circle at 60% 60%, var(--accent-2), transparent 40%); pointer-events:none; }
+
+    /* focus visible (prefer keyboard focus) */
+    :focus { outline: none; }
+    .focus-ring:focus-visible { box-shadow: var(--focus-ring); border-radius:8px; }
+
+    /* respects reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .floating { animation: none !important; transform: none !important; }
+      .hero-image { transition: none !important; }
+    }
+
+    /* responsive adjustments for small screens */
+    @media (max-width: 640px) {
+      .shape-1, .shape-2 { display: none; }
+    }
+  </style>
+</head>
+
+<body class="theme-red antialiased text-slate-100">
+
+<!-- Page wrapper -->
+<div class="min-h-screen bg-gradient-to-b from-black via-[#080808] to-[#0b0b0b] relative overflow-hidden">
+
+  <!-- decorative shapes -->
+  <div class="shape-1" aria-hidden="true"></div>
+  <div class="shape-2" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-black/50 border-b border-white/5" role="banner">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between py-3">
+      <a href="index.html" class="flex items-center gap-3" aria-label="SR Photo & Films home">
+        <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10 shadow"><img src="images/logo.png" alt="SR Photo logo" class="w-full h-full object-cover"></div>
+        <span class="font-dancing text-2xl" style="font-family:'Dancing Script',cursive;">SR Photo & Films</span>
+      </a>
+
+      <nav id="primaryNav" class="hidden md:flex gap-6 items-center" role="navigation" aria-label="Primary">
+        <a class="uppercase text-sm hover:text-[var(--accent)] focus-ring px-2" href="index.html">Home</a>
+        <a class="uppercase text-sm hover:text-[var(--accent)] focus-ring px-2" href="gallery.html">Gallery</a>
+        <a class="uppercase text-sm hover:text-[var(--accent)] focus-ring px-2" href="services.html">Services</a>
+        <a class="uppercase text-sm hover:text-[var(--accent)] focus-ring px-2" href="about.html">About</a>
+        <a class="uppercase text-sm hover:text-[var(--accent)] focus-ring px-2" href="contact.html">Contact</a>
+        <a class="px-3 py-2 text-sm rounded-md text-white accent-btn focus-ring" href="booking.html" role="button">Book Now</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <label for="themeSelect" class="sr-only">Select theme</label>
+        <select id="themeSelect" class="bg-transparent border border-white/6 text-sm px-3 py-1 rounded text-white focus-ring" aria-label="Theme select">
+          <option value="theme-red">Cinematic</option>
+          <option value="theme-neon">Neon</option>
+          <option value="theme-gold">Elegant Gold</option>
+        </select>
+
+        <button id="mobileToggle" class="md:hidden p-2 rounded bg-white/5 focus-ring" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="booking.html" class="btn-book">Book Now</a></li>
-      </ul>
-    </nav>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobileMenu" class="md:hidden bg-black/60 border-t border-white/5 hidden" role="menu" aria-hidden="true">
+      <div class="px-4 py-3 flex flex-col gap-2">
+        <a class="py-2 px-2 rounded hover:bg-white/3 focus-ring" href="index.html">Home</a>
+        <a class="py-2 px-2 rounded hover:bg-white/3 focus-ring" href="gallery.html">Gallery</a>
+        <a class="py-2 px-2 rounded hover:bg-white/3 focus-ring" href="services.html">Services</a>
+        <a class="py-2 px-2 rounded hover:bg-white/3 focus-ring" href="about.html">About</a>
+        <a class="py-2 px-2 rounded hover:bg-white/3 focus-ring" href="contact.html">Contact</a>
+        <a class="py-2 px-2 rounded bg-[var(--accent)] text-black text-center" href="booking.html">Book Now</a>
+      </div>
+    </div>
   </header>
 
-  <!-- ======= HERO SECTION ======= -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Capturing Beautiful Memories</h2>
-      <p>We turn your precious moments into timeless stories.</p>
-      <a href="booking.html" class="hero-btn">Book a Shoot</a>
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-8" role="main">
+    <!-- HERO -->
+    <section class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[64vh]" aria-labelledby="heroTitle">
+      <div class="space-y-6 z-10">
+        <h1 id="heroTitle" class="text-[clamp(2rem,5vw,3.25rem)] font-dancing floating">We capture life — cinematic & intimate.</h1>
+
+        <p id="typedText" class="typing text-lg leading-relaxed text-slate-300" role="status" aria-live="polite"></p>
+
+        <div class="flex gap-4 items-center">
+          <a class="px-4 py-2 rounded-md text-sm text-white accent-btn focus-ring" href="booking.html">Book a Shoot</a>
+          <a class="px-4 py-2 rounded-md text-sm border border-white/6 focus-ring" href="gallery.html">View Gallery</a>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-4 text-sm text-slate-300">
+          <span class="px-3 py-2 rounded bg-white/3">Cinematic Films</span>
+          <span class="px-3 py-2 rounded bg-white/3">Color Grading</span>
+          <span class="px-3 py-2 rounded bg-white/3">Destination Shoots</span>
+        </div>
+      </div>
+
+      <!-- Right: slideshow wrapper -->
+      <div class="relative flex items-center justify-center">
+        <div class="w-[420px] sm:w-[460px] h-[420px] sm:h-[460px] rounded-xl overflow-hidden shadow-2xl hero-image-wrapper" aria-hidden="false">
+          <img id="heroSlide" class="w-full h-full object-cover hero-image" src="images/slide1.jpg" alt="Showcase image">
+        </div>
+        <div class="absolute w-[520px] h-[520px] rounded-full opacity-8 border-2 border-white/3 -z-10 pointer-events-none" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="mt-12" aria-labelledby="servicesTitle">
+      <h2 id="servicesTitle" class="font-dancing text-3xl mb-6">Our Expertise</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="p-6 rounded-xl glass-card" aria-labelledby="s1">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-lg flex items-center justify-center text-2xl" style="background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#000">💖</div>
+            <div>
+              <h3 id="s1" class="font-semibold">Pre-Wedding</h3>
+              <p class="text-sm text-slate-300">Romantic cinematic storytelling in curated locations.</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm text-slate-300">Cinematic compositions, natural emotion, creative direction.</p>
+        </article>
+
+        <article class="p-6 rounded-xl glass-card" aria-labelledby="s2">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-lg flex items-center justify-center text-2xl" style="background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#000">📷</div>
+            <div>
+              <h3 id="s2" class="font-semibold">Weddings</h3>
+              <p class="text-sm text-slate-300">Full-day coverage with highlight films & photo albums.</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm text-slate-300">Reliable team, backup gear, cinematic editing.</p>
+        </article>
+
+        <article class="p-6 rounded-xl glass-card" aria-labelledby="s3">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-lg flex items-center justify-center text-2xl" style="background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#000">🌸</div>
+            <div>
+              <h3 id="s3" class="font-semibold">Maternity & Events</h3>
+              <p class="text-sm text-slate-300">Soft, emotional portraits & lively event coverage.</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm text-slate-300">Comfort-first shoots and candid storytelling.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY PREVIEW -->
+    <section class="mt-12" aria-labelledby="galleryTitle">
+      <h2 id="galleryTitle" class="font-dancing text-3xl mb-6">Selected Work</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <figure class="rounded-xl overflow-hidden" tabindex="0">
+          <img src="images/wed1.jpg" alt="Wedding shot 1" loading="lazy" class="w-full h-56 object-cover transform transition duration-500 hover:scale-105">
+        </figure>
+        <figure class="rounded-xl overflow-hidden" tabindex="0">
+          <img src="images/pre2.jpg" alt="Pre-wedding shot" loading="lazy" class="w-full h-56 object-cover transform transition duration-500 hover:scale-105">
+        </figure>
+        <figure class="rounded-xl overflow-hidden" tabindex="0">
+          <img src="images/bday2.jpg" alt="Birthday candid" loading="lazy" class="w-full h-56 object-cover transform transition duration-500 hover:scale-105">
+        </figure>
+      </div>
+
+      <div class="mt-6">
+        <a class="px-4 py-2 rounded-md text-white accent-btn inline-block focus-ring" href="gallery.html">View Full Gallery</a>
+      </div>
+    </section>
+
+    <!-- PROMO / CTA -->
+    <div class="max-w-6xl mx-auto mt-12 px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-6 rounded-xl glass-card">
+        <div>
+          <h3 class="text-xl font-semibold">Wedding Season Offer</h3>
+          <p class="text-sm text-slate-300">Book a wedding package this month and get <strong style="color:var(--accent)">15% OFF</strong> on film + 200 edited photos.</p>
+        </div>
+        <div class="flex gap-3">
+          <a class="px-4 py-2 rounded-md text-white accent-btn focus-ring" href="booking.html">Book Now</a>
+          <a class="px-4 py-2 rounded-md border border-white/6 focus-ring" href="contact.html">Contact Us</a>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- ======= ABOUT PREVIEW ======= -->
-  <section class="about-preview">
-    <h2>Welcome to SR Photo & Films</h2>
-    <p>We specialize in Pre-Wedding, Maternity, Birthday, and Event photography.  
-    Every photo tells your story — beautifully captured and perfectly framed.</p>
-    <a href="about.html" class="learn-btn">Learn More</a>
-  </section>
+  </main>
 
-  <!-- ======= FOOTER ======= -->
-  <footer>
-    <p>© 2025 SR Photo & Films | All Rights Reserved</p>
+  <!-- FOOTER -->
+  <footer class="mt-12 pt-12 pb-8" style="background:var(--footer-bg);" role="contentinfo">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10"><img src="images/logo.png" alt="logo" class="w-full h-full object-cover"></div>
+          <div>
+            <div class="font-semibold">SR Photo & Films</div>
+            <div class="text-sm text-slate-300">Cinematic photography & films — Based in [Your City]</div>
+          </div>
+        </div>
+        <p class="mt-4 text-sm text-slate-300">Timeless stories captured with passion and creativity.</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h5 class="font-semibold">Quick Links</h5>
+        <a class="text-sm hover:text-[var(--accent)]" href="index.html">Home</a>
+        <a class="text-sm hover:text-[var(--accent)]" href="gallery.html">Gallery</a>
+        <a class="text-sm hover:text-[var(--accent)]" href="services.html">Services</a>
+        <a class="text-sm hover:text-[var(--accent)]" href="contact.html">Contact</a>
+      </div>
+
+      <div class="text-sm">
+        <h5 class="font-semibold">Contact</h5>
+        <div class="mt-2 text-slate-300">[Your Studio Address], India</div>
+        <div class="mt-1 text-slate-300">info@srphoto.com</div>
+        <div class="mt-1 text-slate-300">+91 98765 43210</div>
+        <div class="mt-4 flex gap-2">
+          <a class="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-white/90" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a class="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-white/90" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a class="w-10 h-10 rounded bg-white/5 flex items-center justify-center text-white/90" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-6 text-center text-sm text-slate-400">© 2025 SR Photo & Films — All Rights Reserved</div>
   </footer>
+</div>
 
-  <script src="js/script.js"></script>
+<!-- No-JS fallback -->
+<noscript>
+  <style>
+    .hero-image { opacity: 1 !important; }
+  </style>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <p class="text-yellow-300">This site works best with JavaScript enabled. If you have scripts disabled the slideshow and animations won't run.</p>
+  </div>
+</noscript>
+
+<!-- Robust scripts -->
+<script>
+(function(){
+  // Elements
+  const themeSelect = document.getElementById('themeSelect');
+  const hero = document.getElementById('heroSlide');
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const typedTextEl = document.getElementById('typedText');
+
+  // -- Theme: load/save safely
+  try {
+    const saved = localStorage.getItem('sr_theme') || 'theme-red';
+    document.body.classList.remove('theme-red','theme-neon','theme-gold');
+    document.body.classList.add(saved);
+    if (themeSelect) themeSelect.value = saved;
+  } catch(e) {
+    console.warn('localStorage not available', e);
+  }
+  if (themeSelect) {
+    themeSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      document.body.classList.remove('theme-red','theme-neon','theme-gold');
+      document.body.classList.add(val);
+      try { localStorage.setItem('sr_theme', val); } catch(e){/*ignore*/ }
+    });
+  }
+
+  // -- Mobile menu toggle
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.setAttribute('aria-hidden', String(expanded));
+      // focus first link for keyboard users
+      if (!expanded) {
+        const firstLink = mobileMenu.querySelector('a');
+        if (firstLink) firstLink.focus();
+      }
+    });
+  }
+
+  // -- Respect prefers-reduced-motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // -- Slideshow images (robust)
+  const images = [
+    'images/wed1.jpg',
+    'images/pre4.jpg',
+    'images/bday1.jpg',
+    'images/wed2.jpg',
+    'images/pre2.jpg',
+    'images/bday2.jpg',
+    'images/wed3.jpg',
+    'images/pre3.jpg'
+  ];
+
+  let slideIndex = 0;
+  let slideInterval = null;
+  let slideDelay = prefersReduced ? 4000 : 2000; // slower if reduced motion
+
+  function preload(imgs) {
+    imgs.forEach(src => {
+      const i = new Image();
+      i.src = src;
+    });
+  }
+  preload(images);
+
+  function nextSlide() {
+    if (!hero) return;
+    // find next valid image (skip if not loaded/broken)
+    const maxAttempts = images.length;
+    let attempts = 0;
+    do {
+      const src = images[slideIndex % images.length];
+      hero.style.opacity = 0;
+      setTimeout(() => {
+        hero.src = src;
+        hero.style.opacity = 1;
+      }, 220);
+      slideIndex = (slideIndex + 1) % images.length;
+      attempts++;
+      // We don't check load success synchronously — we add an onerror handler
+      break;
+    } while (attempts < maxAttempts);
+  }
+
+  // handle image load errors: skip to next
+  if (hero) {
+    hero.addEventListener('error', () => {
+      console.warn('Hero slide failed to load:', hero.src);
+      // replace with a fallback or move to next
+      hero.src = 'images/slide-fallback.jpg'; // keep a fallback in your images folder (optional)
+      // after small delay continue slideshow
+    });
+  }
+
+  // Pause/resume on hover/focus, and pause on page hidden
+  function startSlideshow() {
+    if (slideInterval) return;
+    slideInterval = setInterval(nextSlide, slideDelay);
+  }
+  function stopSlideshow() {
+    if (!slideInterval) return;
+    clearInterval(slideInterval);
+    slideInterval = null;
+  }
+
+  if (!prefersReduced) {
+    // start only if JS enabled and not reduced motion
+    startSlideshow();
+    // pause on hover/focus
+    const wrapper = document.querySelector('.hero-image-wrapper');
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', stopSlideshow);
+      wrapper.addEventListener('mouseleave', startSlideshow);
+      wrapper.addEventListener('focusin', stopSlideshow);
+      wrapper.addEventListener('focusout', startSlideshow);
+    }
+    // Pause when tab not visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopSlideshow();
+      else startSlideshow();
+    });
+  }
+
+  // Keyboard: allow left/right arrows to change slides when focused on hero
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      stopSlideshow();
+      nextSlide();
+      if (!prefersReduced) startSlideshow();
+    } else if (e.key === 'ArrowLeft') {
+      // go back one (adjust index)
+      stopSlideshow();
+      slideIndex = (slideIndex - 2 + images.length) % images.length; // because nextSlide increments
+      nextSlide();
+      if (!prefersReduced) startSlideshow();
+    }
+  });
+
+  // -- Typing effect (robust, respects reduced motion)
+  (function typingLoop(){
+    const el = typedTextEl;
+    if (!el) return;
+    const lines = [
+      "Cinematic shoots for weddings, pre-weddings, maternity & events.",
+      "Highlight films • Color grading • Artistic portraiture.",
+      "We travel for destination shoots — tell your story with us."
+    ];
+    if (prefersReduced) {
+      // If user prefers reduced motion, show first line statically
+      el.textContent = lines[0];
+      el.classList.remove('typing');
+      return;
+    }
+    let line = 0, pos = 0, forward = true;
+    function tick(){
+      const txt = lines[line];
+      el.textContent = txt.slice(0, pos);
+      if (forward) pos++;
+      else pos--;
+      if (pos > txt.length){
+        forward = false;
+        setTimeout(tick, 900);
+      } else if (pos <= 0){
+        forward = true;
+        line = (line + 1) % lines.length;
+        setTimeout(tick, 200);
+      } else {
+        setTimeout(tick, 40);
+      }
+    }
+    tick();
+  })();
+
+  // -- Accessibility helpers: add focus-visible outlines for keyboard users
+  (function focusVisiblePolyfill(){
+    let hadKeyboardEvent = false;
+    function handleKeyDown(e){
+      if (e.key === 'Tab' || e.key === 'Shift') {
+        hadKeyboardEvent = true;
+        document.documentElement.classList.add('user-is-tabbing');
+      }
+    }
+    function handlePointerDown(){
+      hadKeyboardEvent = false;
+      document.documentElement.classList.remove('user-is-tabbing');
+    }
+    window.addEventListener('keydown', handleKeyDown, true);
+    window.addEventListener('mousedown', handlePointerDown, true);
+    window.addEventListener('touchstart', handlePointerDown, true);
+  })();
+
+})();
+</script>
 </body>
 </html>

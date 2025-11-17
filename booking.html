@@ -1,102 +1,210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Your Shoot | SR Photo & Films</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book Your Shoot | SR Photo & Films</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+:root{
+  --accent:#b11226;
+  --accent-2:#d41f36;
+}
+
+/* Glass + Glow */
+.glass-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(6px);
+}
+
+/* Accent Button */
+.accent-btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  transition:.25s;
+}
+.accent-btn:hover{
+  transform:scale(1.03);
+}
+
+/* Floating Animation */
+.floating{
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
+}
+
+/* Popup */
+.popup-show{
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1);
+}
+.popup-hide{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(0.9);
+}
+</style>
+
 </head>
-<body>
 
-  <!-- ======= NAVBAR ======= -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="images/logo.png" alt="Logo">
-        <h1>SR Photo & Films</h1>
+<body class="bg-[#0b0b0b] text-white font-[Poppins] overflow-x-hidden">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 bg-black/50 backdrop-blur border-b border-white/5 z-40">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+        <img src="images/logo.png" class="w-full h-full object-cover">
       </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="booking.html" class="active btn-book">Book Now</a></li>
-      </ul>
-    </nav>
-  </header>
+      <span class="font-[Dancing Script] text-2xl">SR Photo & Films</span>
+    </a>
 
-  <!-- ======= BOOKING SECTION ======= -->
-  <section class="booking-section">
-    <h2>Book Your Photoshoot</h2>
-    <p>Fill in the details below and we’ll get in touch to make your moments unforgettable!</p>
-
-    <form id="bookingForm" class="booking-form">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="shootType">Select Shoot Type</label>
-        <select id="shootType" name="shootType" required>
-          <option value="">-- Choose an option --</option>
-          <option value="Pre-Wedding">Pre-Wedding</option>
-          <option value="Wedding">Wedding</option>
-          <option value="Maternity">Maternity</option>
-          <option value="Birthday">Birthday</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="date">Preferred Date</label>
-        <input type="date" id="date" name="date" required>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Additional Message</label>
-        <textarea id="message" name="message" rows="4" placeholder="Any special requests or notes?"></textarea>
-      </div>
-
-      <button type="submit" class="btn">Submit Booking</button>
-    </form>
-  </section>
-
-  <!-- ======= POPUP ======= -->
-  <div id="thankYouPopup" class="popup">
-    <div class="popup-content">
-      <h3>Thank You 💗</h3>
-      <p>Your booking request has been submitted successfully! We’ll contact you soon.</p>
-      <button onclick="closePopup()" class="btn">Close</button>
+    <div class="hidden md:flex gap-6 items-center">
+      <a href="index.html" class="uppercase text-sm">Home</a>
+      <a href="gallery.html" class="uppercase text-sm">Gallery</a>
+      <a href="services.html" class="uppercase text-sm">Services</a>
+      <a href="about.html" class="uppercase text-sm">About</a>
+      <a href="contact.html" class="uppercase text-sm">Contact</a>
+      <a href="booking.html" class="px-4 py-2 rounded-md text-white accent-btn uppercase text-sm">Book Now</a>
     </div>
   </div>
+</nav>
 
-  <!-- ======= FOOTER ======= -->
-  <footer>
-    <p>© 2025 SR Photo & Films | All Rights Reserved</p>
-  </footer>
+<!-- HEADER -->
+<section class="text-center mt-16 mb-10">
+  <h1 class="font-[Dancing Script] text-5xl floating">Book Your Photoshoot</h1>
+  <p class="text-slate-300 max-w-xl mx-auto mt-3">
+    Fill out the form and we will contact you soon.
+  </p>
+</section>
 
-  <script>
-    // Handle Form Submission
-    const form = document.getElementById('bookingForm');
-    const popup = document.getElementById('thankYouPopup');
+<!-- FORM CARD -->
+<div class="max-w-xl mx-auto glass-card p-8 rounded-2xl shadow-xl">
+  <form id="bookingForm" class="space-y-5">
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      popup.classList.add('show');
-      form.reset();
-    });
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Full Name</label>
+      <input name="name" type="text" required class="w-full p-3 rounded bg-black/40 border border-white/10">
+    </div>
 
-    function closePopup() {
-      popup.classList.remove('show');
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Email</label>
+      <input name="email" type="email" required class="w-full p-3 rounded bg-black/40 border border-white/10">
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Phone Number</label>
+      <input name="phone" type="text" required class="w-full p-3 rounded bg-black/40 border border-white/10">
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Shoot Type</label>
+      <select name="shootType" required class="w-full p-3 rounded bg-black/40 border border-white/10">
+        <option value="">Select an option</option>
+        <option>Pre-Wedding</option>
+        <option>Wedding</option>
+        <option>Maternity</option>
+        <option>Birthday</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Preferred Date</label>
+      <input name="date" type="date" required class="w-full p-3 rounded bg-black/40 border border-white/10">
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm text-slate-300">Message (Optional)</label>
+      <textarea name="message" rows="4" class="w-full p-3 rounded bg-black/40 border border-white/10"></textarea>
+    </div>
+
+    <button type="submit" class="w-full py-3 rounded-lg text-white accent-btn font-semibold text-lg">
+      Submit Booking
+    </button>
+
+  </form>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="popup" class="fixed inset-0 bg-black/70 flex items-center justify-center transition popup-hide z-[100]">
+  <div class="glass-card p-8 rounded-2xl text-center w-[90%] max-w-md">
+    <h2 class="text-3xl font-[Dancing Script] mb-2 text-[var(--accent)]">Thank You! 💗</h2>
+    <p class="text-slate-300 mb-5">Your booking has been submitted successfully. We will contact you soon.</p>
+    <button onclick="closePopup()" class="px-5 py-2 rounded bg-[var(--accent)] hover:bg-[var(--accent-2)]">Close</button>
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("bookingForm");
+  const popup = document.getElementById("popup");
+
+  // YOUR FINAL GOOGLE SCRIPT URL
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycby-hS0HPHFQ24n5OjGgnqhPeLCUiPqcDzio4wHcK4w-mIcj1VQ_ErqlZEzEmrotJllR/exec";
+
+  // Close popup
+  window.closePopup = () => {
+    popup.classList.add("popup-hide");
+    popup.classList.remove("popup-show");
+  };
+
+  // On Form Submit
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector("button[type='submit']");
+    const original = btn.textContent;
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      const text = await response.text();
+      console.log("Server:", text);
+
+      if (text.includes("SUCCESS")) {
+        popup.classList.remove("popup-hide");
+        popup.classList.add("popup-show");
+        form.reset();
+      } else {
+        alert("Server Error. Please try again.\n\nDetails: " + text);
+      }
+
+    } catch (error) {
+      alert("Network Error! Please check your connection.");
+      console.error(error);
     }
-  </script>
+
+    btn.disabled = false;
+    btn.textContent = original;
+  });
+});
+</script>
 
 </body>
 </html>

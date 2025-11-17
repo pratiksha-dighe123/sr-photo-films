@@ -1,0 +1,206 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* font-family: 'Dancing Script', cursive;
+  font-family: 'Poppins', sans-serif;
+*/
+
+/* ==================================
+  1. Root Variables & Color Palette
+==================================
+*/
+:root {
+  --brand-red: #A12C2F;        /* A rich, dark red */
+  --brand-red-hover: #8a2528;  /* A slightly darker red for hover */
+  --brand-dark: #212529;
+  --brand-light: #f8f9fa;
+  --font-body: 'Poppins', sans-serif;
+  --font-heading: 'Dancing Script', cursive;
+}
+
+/* ==================================
+  2. Base & Typography
+==================================
+*/
+body {
+  font-family: var(--font-body);
+  color: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* ==================================
+  3. Bootstrap Color Overrides (Dark Red)
+==================================
+*/
+.btn-primary {
+  background-color: var(--brand-red);
+  border-color: var(--brand-red);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--brand-red-hover);
+  border-color: var(--brand-red-hover);
+  /* Adds a subtle red "glow" on hover */
+  box-shadow: 0 4px 12px rgba(161, 44, 47, 0.3); 
+  transform: translateY(-2px);
+}
+
+.text-primary {
+  color: var(--brand-red) !important; /* !important is needed to override utility class */
+}
+
+/* ==================================
+  4. Component Styling
+==================================
+*/
+
+/* --- Navbar --- */
+.logo-font {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Make the active nav link red */
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--brand-red) !important;
+  font-weight: 600;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+/* --- Hero Carousel --- */
+#heroCarousel .carousel-item {
+  height: 90vh; /* Sets the hero height */
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Dark gradient overlay for better text readability */
+#heroCarousel .carousel-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Fades from black at the bottom to transparent at the top */
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); 
+}
+
+#heroCarousel .carousel-caption {
+  bottom: 15%; /* Position the text */
+}
+
+#heroCarousel .carousel-caption h2 {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add shadow to text */
+}
+
+#heroCarousel .carousel-caption p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* --- Services Preview --- */
+.services-preview .card {
+  border: none; /* Cleaner, more modern look */
+  border-radius: 8px; /* Softer edges */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services-preview .card:hover {
+  transform: translateY(-10px); /* Lifts the card on hover */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12); /* More pronounced shadow */
+}
+
+.services-preview .card-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--brand-red); /* Use the red for service titles */
+}
+
+/* --- Gallery Preview --- */
+.gallery-preview .col-lg-4,
+.gallery-preview .col-md-6 {
+  overflow: hidden; /* Important for zoom effect */
+  border-radius: 0.25rem; /* Match the img-fluid rounded */
+  position: relative; /* For the overlay */
+}
+
+.gallery-preview img {
+  transition: transform 0.4s ease;
+}
+
+/* Zoom image on hover */
+.gallery-preview .col-lg-4:hover img,
+.gallery-preview .col-md-6:hover img {
+  transform: scale(1.1);
+}
+
+/* Add a red overlay with a "zoom in" icon on hover */
+.gallery-preview .col-lg-4::before,
+.gallery-preview .col-md-6::before {
+  content: '\F5DE'; /* Bootstrap icon code for "zoom-in" */
+  font-family: 'bootstrap-icons'; /* Tell CSS to use the icon font */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(161, 44, 47, 0.7); /* Red overlay */
+  color: #fff;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.gallery-preview .col-lg-4:hover::before,
+.gallery-preview .col-md-6:hover::before {
+  opacity: 1; /* Fade in the overlay */
+}
+
+
+/* --- Footer --- */
+footer a {
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color: var(--brand-red) !important; 
+}

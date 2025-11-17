@@ -1,113 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us | SR Photo & Films</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | SR Photo & Films</title>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+/* Same theme engine as homepage */
+:root{
+  --accent:#b11226;
+  --accent-2:#cf1b33;
+  --glow:rgba(177,18,38,0.18);
+  --footer-bg:linear-gradient(180deg,#040405,#0b0b0b);
+}
+body.theme-red {
+  --accent:#b11226;
+  --accent-2:#cf1b33;
+  --glow:rgba(177,18,38,0.16);
+  --footer-bg:linear-gradient(180deg,#040405,#0b0708);
+}
+body.theme-neon {
+  --accent:#6ee7f1;
+  --accent-2:#a78bfa;
+  --glow:rgba(103,232,249,0.18);
+  --footer-bg:linear-gradient(180deg,#060517,#030214);
+}
+body.theme-gold {
+  --accent:#d4af37;
+  --accent-2:#ffda77;
+  --glow:rgba(212,175,55,0.12);
+  --footer-bg:linear-gradient(180deg,#0a0907,#040402);
+}
+
+.font-display { font-family:'Dancing Script',cursive; }
+.font-body { font-family:'Poppins',sans-serif; }
+
+.glass-card { background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.05); backdrop-filter:blur(4px); }
+.accent-btn { background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 8px 30px var(--glow); }
+
+.floating { animation:float 4s ease-in-out infinite; }
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-14px); }
+}
+
+/* Glow shapes */
+.shape-1{
+  position:absolute; top:-5rem; left:-5rem;
+  width:20rem; height:20rem;
+  border-radius:50%; filter:blur(80px);
+  background:radial-gradient(circle,var(--accent),transparent 65%);
+  opacity:.35; pointer-events:none;
+}
+.shape-2{
+  position:absolute; bottom:-6rem; right:-5rem;
+  width:26rem; height:26rem;
+  border-radius:50%; filter:blur(100px);
+  background:radial-gradient(circle,var(--accent-2),transparent 65%);
+  opacity:.30; pointer-events:none;
+}
+</style>
 </head>
-<body>
 
-  <!-- ======= NAVBAR ======= -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="images/logo.png" alt="Logo">
-        <h1>SR Photo & Films</h1>
+<body class="theme-red bg-[#0b0b0b] text-slate-100 font-body">
+
+<!-- BG wrapper -->
+<div class="relative overflow-hidden min-h-screen">
+
+<!-- Glow shapes -->
+<div class="shape-1"></div>
+<div class="shape-2"></div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 border-b border-white/10 bg-black/40 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="index.html" class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+        <img src="images/logo.png" class="w-full h-full object-cover">
       </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="booking.html" class="btn-book">Book Now</a></li>
-      </ul>
+      <span class="text-2xl font-display">SR Photo & Films</span>
+    </a>
+
+    <nav class="hidden md:flex gap-6 items-center text-sm uppercase">
+      <a href="index.html" class="hover:text-[var(--accent)]">Home</a>
+      <a href="gallery.html" class="hover:text-[var(--accent)]">Gallery</a>
+      <a href="services.html" class="hover:text-[var(--accent)]">Services</a>
+      <a href="about.html" class="text-[var(--accent)] font-semibold">About</a>
+      <a href="contact.html" class="hover:text-[var(--accent)]">Contact</a>
+      <a href="booking.html" class="accent-btn px-4 py-2 rounded-md">Book Now</a>
     </nav>
-  </header>
 
-  <!-- ======= ABOUT SECTION ======= -->
-  <section class="about-section">
-    <div class="about-container">
-      <div class="about-text">
-        <h2>Our Story 💗</h2>
-        <p>
-          Welcome to <strong>SR Photo & Films</strong> — where emotions turn into art and every smile becomes timeless.
-          Founded with love and passion for storytelling, our studio captures the beauty, laughter, and romance in life’s
-          most precious moments.  
-        </p>
-        <p>
-          Whether it’s a pre-wedding filled with dreamy glances or a joyful birthday celebration, we make every moment last forever
-          through the lens of creativity, emotion, and elegance.
-        </p>
-      </div>
-      <div class="about-image">
-        <img src="images/about1.jpg" alt="Our Studio">
+    <select id="themeSelect" class="bg-transparent text-white text-sm border border-white/20 rounded px-2 py-1 ml-3">
+      <option value="theme-red">Cinematic</option>
+      <option value="theme-neon">Neon</option>
+      <option value="theme-gold">Elegant Gold</option>
+    </select>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative h-[55vh] flex items-center justify-center text-center">
+  <div class="absolute inset-0 bg-[url('images/bgimg.png')] bg-cover bg-center opacity-30"></div>
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+  <div class="relative z-20 px-4">
+    <h1 class="text-5xl font-display floating">About SR Photo & Films</h1>
+    <p class="max-w-2xl mx-auto text-slate-300 mt-3">
+      Crafting cinematic memories with emotion, artistry & passion.
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
+  <img src="images/about1.jpg" class="rounded-xl shadow-2xl object-cover h-[360px]">
+
+  <div>
+    <h2 class="font-display text-4xl text-[var(--accent)]">Our Story</h2>
+    <p class="text-slate-300 mt-4 leading-relaxed">
+      SR Photo & Films began with a dream — to turn moments into timeless stories.
+      <br><br>
+      With 8+ years of experience, we create cinematic wedding films, emotional portraits,
+      and premium event coverage using professional-grade gear & creative artistry.
+    </p>
+  </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="py-16 bg-black/40 backdrop-blur">
+  <h2 class="font-display text-center text-4xl text-[var(--accent)]">What Drives Us</h2>
+
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 mt-10">
+    <div class="glass-card p-6 rounded-xl">
+      <h3 class="font-display text-3xl mb-2">Mission</h3>
+      <p class="text-slate-300">To deliver heartfelt cinematic visual stories that live forever.</p>
+    </div>
+
+    <div class="glass-card p-6 rounded-xl">
+      <h3 class="font-display text-3xl mb-2">Vision</h3>
+      <p class="text-slate-300">To become India’s most trusted cinematic photography team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="font-display text-center text-4xl text-[var(--accent)]">Meet the Team</h2>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-10">
+    <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition">
+      <img src="images/team1.jpg" class="h-[260px] w-full object-cover">
+      <div class="p-4 text-center">
+        <h4 class="text-lg font-semibold">Rahul Sharma</h4>
+        <p class="text-slate-400 text-sm">Lead Photographer</p>
       </div>
     </div>
-  </section>
 
-  <!-- ======= TIMELINE SECTION ======= -->
-  <section class="timeline-section">
-    <h2>Our Journey 📸</h2>
-
-    <div class="timeline">
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <h3>2018 – The Beginning</h3>
-          <p>Our journey started with a small camera and a big dream — to tell love stories through our lenses.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <h3>2020 – The Growth</h3>
-          <p>We expanded our services and built our own cozy studio — SR Photo & Films, Pune.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <h3>2022 – Recognition</h3>
-          <p>Our work got featured in multiple wedding blogs and we reached 1,000+ happy clients.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <h3>2025 – Today</h3>
-          <p>We continue capturing emotions with passion, creativity, and an ever-growing family of lovely clients.</p>
-        </div>
+    <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition">
+      <img src="images/team2.jpg" class="h-[260px] w-full object-cover">
+      <div class="p-4 text-center">
+        <h4 class="text-lg font-semibold">Aditi Mehra</h4>
+        <p class="text-slate-400 text-sm">Creative Director</p>
       </div>
     </div>
-  </section>
 
-  <!-- ======= TEAM SECTION ======= -->
-  <section class="team-section">
-    <h2>Meet Our Team 💞</h2>
-    <div class="team-container">
-      <div class="team-member">
-        <img src="images/team1.jpg" alt="Founder">
-        <h3>Rohit Sharma</h3>
-        <p>Founder & Lead Photographer</p>
-      </div>
-      <div class="team-member">
-        <img src="images/team2.jpg" alt="Co-Founder">
-        <h3>Simran Kaur</h3>
-        <p>Creative Director</p>
-      </div>
-      <div class="team-member">
-        <img src="images/team3.jpg" alt="Editor">
-        <h3>Arjun Mehta</h3>
-        <p>Photo & Video Editor</p>
+    <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition">
+      <img src="images/team3.jpg" class="h-[260px] w-full object-cover">
+      <div class="p-4 text-center">
+        <h4 class="text-lg font-semibold">Sameer Khan</h4>
+        <p class="text-slate-400 text-sm">Senior Editor</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ======= FOOTER ======= -->
-  <footer>
-    <p>© 2025 SR Photo & Films | All Rights Reserved</p>
-  </footer>
+<!-- COUNTERS -->
+<section class="py-14 bg-black/30 text-center backdrop-blur">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div>
+      <div class="text-4xl font-bold text-[var(--accent)]">1500+</div>
+      <p class="text-slate-300">Projects</p>
+    </div>
+
+    <div>
+      <div class="text-4xl font-bold text-[var(--accent)]">8+ Yrs</div>
+      <p class="text-slate-300">Experience</p>
+    </div>
+
+    <div>
+      <div class="text-4xl font-bold text-[var(--accent)]">1200+</div>
+      <p class="text-slate-300">Happy Clients</p>
+    </div>
+
+    <div>
+      <div class="text-4xl font-bold text-[var(--accent)]">98%</div>
+      <p class="text-slate-300">Reviews</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="px-6 py-16 max-w-6xl mx-auto text-center">
+  <h2 class="font-display text-4xl text-[var(--accent)]">Why Choose Us?</h2>
+  <p class="text-slate-300 max-w-2xl mx-auto mt-2">Your memories deserve a cinematic touch.</p>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-10">
+    <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition">
+      <i class="bi bi-camera2 text-[var(--accent)] text-4xl"></i>
+      <h4 class="mt-3 font-semibold">Premium Gear</h4>
+      <p class="text-slate-400 text-sm mt-1">High-end cameras, lenses & lighting.</p>
+    </div>
+
+    <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition">
+      <i class="bi bi-magic text-[var(--accent)] text-4xl"></i>
+      <h4 class="mt-3 font-semibold">Cinematic Creativity</h4>
+      <p class="text-slate-400 text-sm mt-1">Artistic storytelling with emotion.</p>
+    </div>
+
+    <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition">
+      <i class="bi bi-person-heart text-[var(--accent)] text-4xl"></i>
+      <h4 class="mt-3 font-semibold">Friendly Team</h4>
+      <p class="text-slate-400 text-sm mt-1">Comfortable, natural & fun sessions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-6 text-center text-sm" style="background:var(--footer-bg);">
+  © 2025 SR Photo & Films — All Rights Reserved
+</footer>
+
+</div> <!-- end wrapper -->
+
+<script>
+// theme switcher (same as landing page)
+(function(){
+  const select=document.getElementById('themeSelect');
+  const saved=localStorage.getItem('sr_theme')||'theme-red';
+  document.body.classList.add(saved);
+  select.value=saved;
+  select.addEventListener('change',e=>{
+    document.body.classList.remove('theme-red','theme-neon','theme-gold');
+    document.body.classList.add(e.target.value);
+    localStorage.setItem('sr_theme',e.target.value);
+  });
+})();
+</script>
 
 </body>
 </html>
